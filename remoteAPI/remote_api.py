@@ -21,6 +21,7 @@ def send_request(
         service,
         url,
         data=None,
+        params=None,
         files=None,
         token=None,
         raise_exception=True):
@@ -35,13 +36,14 @@ def _send_request(
         method,
         url,
         data,
+        params,
         files,
         headers,
         raise_exception=True):
     if isinstance(method, str):
         method = getattr(requests, method)
 
-    response = method(url, headers=headers, data=data, files=files, timeout=10)
+    response = method(url, headers=headers, data=data, files=files, params=params, timeout=10)
 
     if response.headers.get('content-type') != 'application/json':
         if raise_exception:
