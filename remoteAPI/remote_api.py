@@ -3,10 +3,9 @@ import logging
 
 import jwt
 import requests
+from appdarchi.exceptions import ApiCallError, ServerError
 from django.http.response import JsonResponse
 from django.utils.translation import ugettext_lazy as _
-
-from appdarchi.exceptions import ApiCallError, ServerError
 from settings import JWT_SECRET_KEY, ServiceDNS, Services, TOKEN_EMAIL
 
 logger = logging.getLogger(__name__)
@@ -29,7 +28,7 @@ def send_request(
         token = generate_privileged_token()
 
     url = ServiceDNS[service] + url
-    return _send_request(method, url, data, files, {'Authorization': token}, raise_exception)
+    return _send_request(method, url, data, params, files, {'Authorization': token}, raise_exception)
 
 
 def _send_request(
