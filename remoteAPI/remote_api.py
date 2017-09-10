@@ -3,7 +3,7 @@ import logging
 
 import jwt
 import requests
-from appdarchi.exceptions import ApiCallError, ServerError
+from remoteAPI.exceptions import ApiCallError, ServerError
 from django.http.response import JsonResponse
 from django.utils.translation import ugettext_lazy as _
 from settings import JWT_SECRET_KEY, ServiceDNS, Services, TOKEN_EMAIL
