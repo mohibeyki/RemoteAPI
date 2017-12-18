@@ -22,13 +22,17 @@ def send_request(
         data=None,
         params=None,
         files=None,
+        headers=None,
         token=None,
         raise_exception=True):
+    if headers is None:
+        headers = {}
     if service == Services.CAPI:
         token = generate_privileged_token()
 
     url = ServiceDNS[service] + url
-    return _send_request(method, url, data, params, files, {'Authorization': token}, raise_exception)
+    headers['Authorization'] = token
+    return _send_request(method, url, data, params, files, headers, raise_exception)
 
 
 def _send_request(
